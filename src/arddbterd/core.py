@@ -52,7 +52,7 @@ def createRelatonship(dbml_path, schema):
         dbml_path (dbml file): The file where to store the table
         schema (dbt schema): The dbt schema to extract relationships from 
     """    
-    for model in zip(schema["models"],schema["sources"]):
+    for model in zip(schema["models"], schema["sources"]):
         for column in model["columns"]:
             if "tests" in column:
                 tests = column["tests"]
@@ -79,13 +79,13 @@ def genereatedbml(schema_path, catalog_path, dbml_path):
         dbml_path (Path): Pat to save dbml file 
     """    
     catalog, schema = loadModel(catalog_path, schema_path)
-    model_names = catalog["nodes"]
+    model_names = zip(catalog["nodes"], catalog["sources"])
     
-    tables = [model["name"].upper() for model in schema["models"]]
+    tables = [model["name"].upper() for model in zip(schema["models"], schema["sources"])]
     
     with open(dbml_path, "w") as dbml_file:
         for model_name in model_names:
-            model = catalog["nodes"][model_name]
+            model = zip(catalog["nodes"][model_name], catalog["sources"][model_name])
             if model["metadata"]["name"] in tables: 
                 createTable(dbml_file, model)        
         createRelatonship(dbml_file, schema)
