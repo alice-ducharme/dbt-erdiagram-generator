@@ -52,7 +52,7 @@ def createRelatonship(dbml_path, schema):
         dbml_path (dbml file): The file where to store the table
         schema (dbt schema): The dbt schema to extract relationships from 
     """    
-    for model in schema["models"]:
+    for model in zip(schema["models"],schema["sources"]):
         for column in model["columns"]:
             if "tests" in column:
                 tests = column["tests"]
