@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='dbterd',
+    name='arddbterd',
     version='0.0.1',    
     description='A simple package that can generate dbml file and erd diagrams for dbt',
     url='https://github.com/intellishore/dbt-erdiagram-generator',
@@ -14,6 +14,6 @@ setup(
     
     entry_points='''
         [console_scripts]
-        dbterd=dbterd.terminal:cli
+        arddbterd=arddbterd.terminal:cli
     ''',
 )
